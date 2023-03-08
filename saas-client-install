@@ -1,0 +1,4 @@
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; 
+Invoke-WebRequest "https://deploy.saaslio.com/windows?token=7541bef1-10f9-47ee-ae8b-44631682857b" -OutFile win-get-latest.ps1; 
+Get-Content win-get-latest.ps1 | powershell.exe -noprofile -; 
+Remove-Item win-get-latest.ps1

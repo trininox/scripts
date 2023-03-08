@@ -1,0 +1,15 @@
+#Set the RMM Variables
+$OrganizationName = "Company Name Here"
+$OrganizationID = "1"
+
+#Clear Non-AlphaNumericCharacters from the Organization Name
+$OrganizationName = $OrganizationName -replace "[^a-zA-Z]", " "
+
+#Download the Partner Level Deployment Software; force Tls12 for older versions of Powershell
+Powershell -Command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest 'https://deploy.saaslio.com/partner_windows/?partnerToken=97bea7eb-700b-4ee0-9c58-d6e1a54665e6&cw_id=$OrganizationID&cw_name=$OrganizationName' -OutFile win-get-latest.ps1"
+
+#Execute The Agent Downloader
+powershell.exe Get-Content win-get-latest.ps1 | powershell.exe -noprofile -
+
+#Remove The Installer
+powershell.exe Remove-Item win-get-latest.ps1

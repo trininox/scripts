@@ -1,0 +1,2 @@
+Invoke-WebRequest https://deploy.saaslio.com/uninstall -O uninstall.ps1; 
+Get-Content uninstall.ps1 | powershell.exe -noprofile -; Remove-Item uninstall.ps1
